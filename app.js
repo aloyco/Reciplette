@@ -19,10 +19,10 @@ const upload = multer({ storage: storage });
 
 // Create MySQL connection
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'reciplette'
+    host: 'mysql-reciplette.alwaysdata.net',
+    user: '371280',
+    password: 'PykUeV64._K4wjg',
+    database: 'reciplette_rp'
 });
 connection.connect((err) => {
     if (err) {
