@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Reciplette</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Reciplette</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Recipes</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="/category">Categories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/addRecipe">Add recipe</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="/addCategory">Add category</a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="/roulette">Roulette</a>
+              </li> 
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class="row">
+      <% for(let i = 0; i < recipe.length; i++) { %> 
+        <div class="col-md-4"> 
+          <div class="card mb-4"> 
+            <img src="/images/<%= recipe[i].image %>" class="card-img-top product-image" alt="<%= recipe[i].recipe_name %>" onerror="this.onerror=null;this.src='/images/placeholder.png';" style="width: 200px; height: 200px;">
+            <div class="card-body"> 
+              <h5 class="card-title">
+                <a href="/recipe/<%= recipe[i].recipeID %>"><%= recipe[i].recipe_name %></a>
+              </h5>
+              <div class="btn-group" role="group" aria-label="Recipe Actions">
+                <form action="/add-to-roulette" method="POST" style="display: inline;">
+                  <input type="hidden" name="recipeID" value="<%= recipe[i].recipeID %>">
+                  <button type="submit" class="btn btn-primary">Add to Roulette</button>
+                </form>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='/editRecipe/<%= recipe[i].recipeID %>'">Edit</button>
+                <form action="/deleteRecipe" method="POST">
+                  <input type="hidden" name="recipeID" value="<%= recipe[i].recipeID %>">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+          </div> 
+        </div>
+        <% } %>
+      </div>
+    </div>
+</body>
